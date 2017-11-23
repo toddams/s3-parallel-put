@@ -48,6 +48,9 @@ from boto.s3.connection import OrdinaryCallingFormat
 from boto.s3.acl import CannedACLStrings
 from boto.utils import compute_md5
 
+import ssl
+if hasattr(ssl, '_create_unverified_context'):
+   ssl._create_default_https_context = ssl._create_unverified_context
 
 DONE_RE = re.compile(r'\AINFO:s3-parallel-put\[putter-\d+\]:\S+\s+->\s+(\S+)\s*\Z')
 
