@@ -44,6 +44,7 @@ import mimetypes
 
 import boto
 from boto.s3.connection import S3Connection
+from boto.s3.connection import OrdinaryCallingFormat
 from boto.s3.acl import CannedACLStrings
 from boto.utils import compute_md5
 
@@ -189,7 +190,7 @@ def walk_tar(source, options):
 
 
 def walk_s3(source, options):
-    connection = S3Connection(host=options.host, is_secure=options.secure)
+    connection = S3Connection(host=options.host, is_secure=options.secure, calling_format=OrdinaryCallingFormat())
     for key in connection.get_bucket(source).list():
         if excluded(key.name, options):
             continue
